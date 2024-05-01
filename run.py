@@ -58,7 +58,10 @@ if __name__ == '__main__':
 
     def get_response(message, history):
         answer = chatbot(message)['answer']
-        token = '[/INST]'
-        return answer[answer.rfind(token) + len(token):]
+        ins_token = '[/INST]'
+        return answer[answer.rfind(ins_token) + len(ins_token):]
 
-    gr.ChatInterface(get_response).launch(share=True)
+    with gr.Blocks(fill_height=True) as demo:
+        gr.HTML("<img src=file/logo.png style=\"width:30%;\">")
+        gr.ChatInterface(get_response)
+    demo.launch(share=True, allowed_paths=['.'])
